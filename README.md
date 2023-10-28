@@ -1,2 +1,2 @@
 # dll-injector
-A DLL injector that supports native injection and manual mapping. 
+A DLL injector that supports naive injection and manual mapping. 
