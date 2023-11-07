@@ -1,45 +1,31 @@
 #include "mem/mem.h"
-#include "naive/naive.h"
-#include "mmap/mmap.h"
+#include "gui/gui.h"
+#include <thread>
 
-int main()
+
+INT APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, INT nCmdShow)
 {
-    SetConsoleTitleA(mem::RandomString(26).c_str());
-
-    std::string type;
-    std::cout << "Chose the injector type:" << std::endl;
-    std::cout << "[1] Naive Injection\n" << "[2] Manual Mapping" << std::endl;
-    std::getline(std::cin, type);
 
     
-    //adjust these values to your needs
-    const char * name = "cs2.exe";
-    const char * dllPath = "D:\\cs2_client\\x64\\Release\\cs2_client.dll";
-   
-    DWORD procID = mem::GetProcID(name);
-    if (!procID)
-    {
-        std::cout << "Failed to get process ID" << std::endl;
-        std::cin.get();
-        return 0;
-    }
-    else
-    {
-        std::cout << "Process ID: " << procID << std::endl;
-    }
+    mem::GetProcID();
+    // create gui
+	gui::CreateHWindow("Cheat Menu");
+	gui::CreateDevice();
+	gui::CreateImGui();
 
+	while (gui::isRunning)
+	{
+		gui::BeginRender();
+		gui::Render();
+		gui::EndRender();
 
-    switch (atoi(type.c_str()))
-    {
-    case 1:
-        naive::inject(procID, dllPath);
-        break;
-    case 2:
-        mmap::inject(procID, dllPath);
-        break;
-    default:
-        break;
-    }
-    
-    std::cin.get();
+		std::this_thread::sleep_for(std::chrono::milliseconds(5));
+	}
+
+	// destroy gui
+	gui::DestroyImGui();
+	gui::DestroyDevice();
+	gui::DestroyHWindow();
+
+	return EXIT_SUCCESS;
 }

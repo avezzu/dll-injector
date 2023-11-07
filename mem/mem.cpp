@@ -1,20 +1,28 @@
 #include "mem.h"
+#include <cstdint>
 
-DWORD mem::GetProcID(const char* procName) {
+std::map<std::string, DWORD> mem::processList;
+std::vector<std::string> mem::keysArray;
+
+void mem::GetProcID() {
     HANDLE hSnap = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
     if (hSnap != INVALID_HANDLE_VALUE) {
         PROCESSENTRY32 procEntry;
         procEntry.dwSize = sizeof(procEntry);
         if (Process32First(hSnap, &procEntry)) {
             do {
-                if (!_stricmp(procEntry.szExeFile, procName)) {
-                    CloseHandle(hSnap);
-                    return procEntry.th32ProcessID;
-                }
+                std::string key(procEntry.szExeFile);
+                processList[key] = procEntry.th32ProcessID;
             } while (Process32Next(hSnap, &procEntry));
         }
+        CloseHandle(hSnap);
     }
-    return 0;
+
+    for (auto& pair : processList) {
+        std::cout << pair.first << std::endl;
+        keysArray.push_back(pair.first);
+    }
+
 }
 
 std::string mem::RandomString(const size_t size) {
