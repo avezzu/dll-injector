@@ -10,8 +10,12 @@
 #include "../naive/naive.h"
 #include "../mmap/mmap.h"
 
+#include <algorithm>
+
 const char *gui::dllPath = "";
 const char *gui::name = "Select Process";
+
+
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(
 	HWND window,
 	UINT message,
@@ -263,6 +267,15 @@ void InfosPane(const char *vFilter, IGFDUserDatas vUserDatas, bool *vCantContinu
 		*vCantContinue = canValidateDialog;
 }
 
+std::string ReplaceAll(std::string str, const std::string& from, const std::string& to) {
+    size_t start_pos = 0;
+    while((start_pos = str.find(from, start_pos)) != std::string::npos) {
+        str.replace(start_pos, from.length(), to);
+        start_pos += to.length(); // Handles case where 'to' is a substring of 'from'
+    }
+    return str;
+}
+
 void drawGui()
 {
 	// open Dialog with Pane
@@ -278,7 +291,8 @@ void drawGui()
 		{
 			std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
 			std::string filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
-			gui::dllPath = filePath.c_str();
+			
+			gui::dllPath = strdup(filePathName.c_str());
 			std::string filter = ImGuiFileDialog::Instance()->GetCurrentFilter();
 			// here convert from string because a string was passed as a userDatas, but it can be what you want
 			std::string userDatas;
@@ -300,10 +314,10 @@ void inject()
 	
 	switch (type)
 	{
-	case 1:
+	case 0:
 		naive::inject(mem::processList[gui::name], gui::dllPath);
 		break;
-	case 2:
+	case 1:
 		mmap::inject(mem::processList[gui::name], gui::dllPath);
 		break;
 	default:
@@ -325,6 +339,13 @@ void gui::Render() noexcept
 
 	drawGui();
 	ImGui::Text("");
+
+	if(gui::dllPath != "")
+		ImGui::Text("DLL Path: %s", gui::dllPath);
+	else
+		ImGui::Text("DLL Path: No file selected");
+
+	ImGui::Text("");
 	if (ImGui::BeginCombo("##combo", name))
 	{
 
@@ -340,6 +361,13 @@ void gui::Render() noexcept
 	}
 
 	ImGui::Text("");
+	if (ImGui::Button("Refresh"))
+	{
+		mem::GetProcID();
+	}
+	ImGui::Text("");
+
+	ImGui::Text("");
 	ImGui::RadioButton("Naive Injection", &type, 0);
 	ImGui::RadioButton("Manual Mapping", &type, 1);
 	ImGui::Text("");
@@ -348,6 +376,7 @@ void gui::Render() noexcept
 	{
 		inject();
 	}
+
 
 	ImGui::End();
 }

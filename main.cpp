@@ -6,8 +6,7 @@
 INT APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, INT nCmdShow)
 {
 
-    
-    mem::GetProcID();
+	mem::GetProcID();
     // create gui
 	gui::CreateHWindow("Cheat Menu");
 	gui::CreateDevice();

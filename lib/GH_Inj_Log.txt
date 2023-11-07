@@ -1,0 +1,64 @@
+07-11-2023 19:41:53
+Version            : GH Injector V4.8
+OS                 : Windows 11 22H2 (Build 22621)
+RawData            : 0x000001A676B83730
+RawSize            : 0x2A218260 bytes
+Target             : 
+Target PID         : 19276
+Source             : Injection.cpp in Inject_Internal at line 135
+Errorcode          : 0x00000005
+Advanced errorcode : 0x00000002
+Injectionmode      : ManualMap
+Launchmethod       : NtCreateThreadEx
+Platform           : ---
+HandleValue        : 0x00000000
+Flags              : 0x00FE0000
+
+07-11-2023 19:35:49
+Version            : GH Injector V4.8
+OS                 : Windows 11 22H2 (Build 22621)
+RawData            : 0x0000018F0BF306D0
+RawSize            : 0x45DA8260 bytes
+Target             : 
+Target PID         : 19276
+Source             : Injection.cpp in Inject_Internal at line 135
+Errorcode          : 0x00000005
+Advanced errorcode : 0x0000007B
+Injectionmode      : ManualMap
+Launchmethod       : NtCreateThreadEx
+Platform           : ---
+HandleValue        : 0x00000000
+Flags              : 0x00FE0000
+
+07-11-2023 19:33:01
+Version            : GH Injector V4.8
+OS                 : Windows 11 22H2 (Build 22621)
+RawData            : 0x00000202AA91DC20
+RawSize            : 0x45DA8260 bytes
+Target             : 
+Target PID         : 19276
+Source             : Injection.cpp in Inject_Internal at line 135
+Errorcode          : 0x00000005
+Advanced errorcode : 0x00000002
+Injectionmode      : ManualMap
+Launchmethod       : NtCreateThreadEx
+Platform           : ---
+HandleValue        : 0x00000000
+Flags              : 0x00FE0000
+
+07-11-2023 19:23:19
+Version            : GH Injector V4.8
+OS                 : Windows 11 22H2 (Build 22621)
+RawData            : 0x0000027ED86259A0
+RawSize            : 0x45DA8260 bytes
+Target             : 
+Target PID         : 19276
+Source             : Injection.cpp in Inject_Internal at line 135
+Errorcode          : 0x00000005
+Advanced errorcode : 0x00000002
+Injectionmode      : ManualMap
+Launchmethod       : NtCreateThreadEx
+Platform           : ---
+HandleValue        : 0x00000000
+Flags              : 0x00FE0000
+

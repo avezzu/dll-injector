@@ -6,11 +6,11 @@
 #include <ctime>
 #include <map>
 #include <vector>
+#include <algorithm>
 
 namespace mem{
     extern std::map<std::string, DWORD> processList;
     extern std::vector<std::string> keysArray;
 
     void GetProcID();
-    std::string RandomString(const size_t size);
 }
