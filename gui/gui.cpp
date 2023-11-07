@@ -295,6 +295,9 @@ void drawGui()
 int type = 0;
 void inject()
 {
+	if (gui::dllPath == "" || gui::name == "Select Process" || gui::name == "")
+		return;
+	
 	switch (type)
 	{
 	case 1:
