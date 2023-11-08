@@ -16,7 +16,7 @@ This DLL injector, written in C++, offers simple functionalities for both naive 
 - Manual mapping
 
 ## Usage
-- Download the latest release from the [releases](https://github.com/avezzu/dll-injector/releases) or compile the source code yourself and run the executable.
+- Adjust the file paths, compile the source code yourself and run the executable.
 
 ## Dependencies
 - [GH-Injector-Library](https://github.com/Broihon/GH-Injector-Library) - manual mapping
